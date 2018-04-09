@@ -12,8 +12,8 @@ with open('HISTORY.md') as history_file:
     history = history_file.read()
 
 requirements = [
-    {%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %}
-    {%- if cookiecutter.support_py2 == 'y' %}'six',{%- endif %}
+    {% if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{% endif %}
+    {% if cookiecutter.support_py2 == 'y' %}'six',{% endif %}
 ]
 
 setup_requirements = ['pytest-runner', ]
