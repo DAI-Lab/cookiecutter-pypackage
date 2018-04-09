@@ -3,7 +3,9 @@ python:
   - 3.6
   - 3.5
   - 3.4
+{%- if cookiecutter.support_py2 == 'y' %}
   - 2.7
+{%- endif %}
 install: pip install -U tox-travis
 script: tox
 

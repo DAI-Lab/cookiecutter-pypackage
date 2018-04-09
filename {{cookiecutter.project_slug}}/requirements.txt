@@ -1,0 +1,1 @@
+{%- if cookiecutter.support_py2 == 'y' %}six{%- endif %}
