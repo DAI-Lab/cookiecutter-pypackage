@@ -6,7 +6,7 @@ Cookiecutter_ template for a Python package, customized for DAI-Lab.
 
 This is a slight fork of https://github.com/audreyr/cookiecutter-pypackage.
 
-fOR ANY BUGS OR QUESTIONS, CONTACT MICAH SMITH (@micahjsmith).
+FOR ANY BUGS OR QUESTIONS, CONTACT MICAH SMITH (@micahjsmith).
 
 * GitHub repo: https://github.com/DAI-Lab/cookiecutter-pypackage/
 * Free software: BSD license
