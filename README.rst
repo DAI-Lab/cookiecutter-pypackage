@@ -6,8 +6,9 @@ Cookiecutter_ template for a Python package, customized for DAI-Lab.
 
 This is a slight fork of https://github.com/audreyr/cookiecutter-pypackage.
 
+.. note:: For any bugs or questions, contact Micah Smith (@micahjsmith).
+
 * GitHub repo: https://github.com/DAI-Lab/cookiecutter-pypackage/
-* Documentation: https://cookiecutter-pypackage.readthedocs.io/
 * Free software: BSD license
 
 Features
@@ -20,8 +21,6 @@ Features
 * Bumpversion_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 * Command line interface using Click (optional)
-
-.. _Cookiecutter: https://github.com/DAI-Lab/cookiecutter
 
 Quickstart
 ----------
@@ -56,10 +55,15 @@ Then:
   your project and their versions. For more info see the `pip docs for requirements files`_.
 * View your built documentation on the web
 
+For more details, see the `cookiecutter-pypackage tutorial`_.
+
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 .. _`Sign up for a Test PyPI account`: https://test.pypi.org/account/register/
 .. _Register: https://packaging.python.org/distributing/#register-your-project
-
-For more details, see the `cookiecutter-pypackage tutorial`_.
-
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
+.. _Cookiecutter: https://github.com/DAI-Lab/cookiecutter
+.. _Travis-CI: http://travis-ci.org/
+.. _Tox: http://testrun.org/tox/
+.. _Sphinx: http://sphinx-doc.org/
+.. _Bumpversion: https://github.com/peritus/bumpversion
+.. _PyPi: https://pypi.python.org/pypi
