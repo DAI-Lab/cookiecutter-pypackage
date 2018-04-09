@@ -64,21 +64,13 @@ fixlint: ## fix lint issues using autoflake, autopep8, and isort
 	isort --apply --atomic --recursive tests
 
 test: ## run tests quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
-	py.test
-{%- else %}
-	python setup.py test
-{%- endif %}
+	pytest
 
 test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
 	coverage run --source {{ cookiecutter.project_slug }} -m pytest
-{%- else %}
-	coverage run --source {{ cookiecutter.project_slug }} setup.py test
-{%- endif %}
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html

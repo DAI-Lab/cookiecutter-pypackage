@@ -16,9 +16,9 @@ requirements = [
     {%- if cookiecutter.support_py2 == 'y' %}'six',{%- endif %}
 ]
 
-setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
+setup_requirements = ['pytest-runner', ]
 
-test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %} ]
+test_requirements = ['pytest', ]
 
 {%- set license_classifiers = {
     'MIT license': 'License :: OSI Approved :: MIT License',
