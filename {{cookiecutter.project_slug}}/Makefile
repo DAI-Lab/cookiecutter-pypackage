@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build clean-docs docs help
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -29,7 +29,7 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+clean: clean-build clean-pyc clean-test clean-docs ## remove all build, test, coverage, docs and Python artifacts
 
 clean-build: ## remove build artifacts
 	rm -fr build/
@@ -52,6 +52,16 @@ clean-test: ## remove test and coverage artifacts
 
 lint: ## check style with flake8
 	flake8 {{ cookiecutter.project_slug }} tests
+	isort -c --recursive {{ cookiecutter.project_slug }} tests
+
+fixlint: ## fix lint issues using autoflake, autopep8, and isort
+	find {{ cookiecutter.project_slug }} -name '*.py' | xargs autoflake --in-place --remove-all-unused-imports --remove-unused-variables
+	autopep8 --in-place --recursive --aggressive {{ cookiecutter.project_slug }}
+	isort --apply --atomic --recursive {{ cookiecutter.project_slug }}
+
+	find tests -name '*.py' | xargs autoflake --in-place --remove-all-unused-imports --remove-unused-variables
+	autopep8 --in-place --recursive --aggressive tests
+	isort --apply --atomic --recursive tests
 
 test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
@@ -73,12 +83,17 @@ coverage: ## check code coverage quickly with the default Python
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
+clean-docs: ## remove previously built docs
 	rm -f docs/{{ cookiecutter.project_slug }}.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
 	$(MAKE) -C docs clean
+
+docs: clean-docs ## generate Sphinx HTML documentation, including API docs
+	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
 	$(MAKE) -C docs html
+	touch docs/_build/html/.nojekyll
+
+viewdocs: docs ## view docs in browser
 	$(BROWSER) docs/_build/html/index.html
 
 servedocs: docs ## compile the docs watching for changes
@@ -86,6 +101,9 @@ servedocs: docs ## compile the docs watching for changes
 
 release: dist ## package and upload a release
 	twine upload dist/*
+
+test-release: dist ## package and upload a release on TestPyPI
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 dist: clean ## builds source and wheel package
 	python setup.py sdist
