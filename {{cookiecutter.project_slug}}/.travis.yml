@@ -12,7 +12,7 @@ script: tox
 {% if cookiecutter.use_pypi_deployment_with_travis == 'y' or cookiecutter.use_ghpages_deployment_with_travis -%}
 deploy:
 {%- endif %}
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
+{% if cookiecutter.use_pypi_deployment_with_travis == 'y' %}
   # Assuming you have installed the travis-ci CLI tool, after you
   # create the Github repo and add it to Travis, run the
   # following command to finish PyPI deployment setup:
@@ -28,7 +28,7 @@ deploy:
       repo: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
       python: 3.6
 {%- endif %}
-{% if cookiecutter.use_ghpages_deployment_with_travis == 'y' -%}
+{% if cookiecutter.use_ghpages_deployment_with_travis == 'y' %}
   # Follow the instructions at https://docs.travis-ci.com/user/deployment/pages/
   # to setup a personal deployment token and then provide it as a secure
   # environment variable at https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/settings

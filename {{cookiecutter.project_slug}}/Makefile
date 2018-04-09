@@ -50,7 +50,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-lint: ## check style with flake8
+lint: ## check style with flake8 and isort
 	flake8 {{ cookiecutter.project_slug }} tests
 	isort -c --recursive {{ cookiecutter.project_slug }} tests
 
