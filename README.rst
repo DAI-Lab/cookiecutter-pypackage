@@ -6,7 +6,7 @@ Cookiecutter_ template for a Python package, customized for DAI-Lab.
 
 This is a slight fork of https://github.com/audreyr/cookiecutter-pypackage.
 
-.. note:: For any bugs or questions, contact Micah Smith (@micahjsmith).
+fOR ANY BUGS OR QUESTIONS, CONTACT MICAH SMITH (@micahjsmith).
 
 * GitHub repo: https://github.com/DAI-Lab/cookiecutter-pypackage/
 * Free software: BSD license
@@ -44,12 +44,14 @@ Then:
 * Run the Travis CLI command `travis encrypt MY_PYPI_PASSWORD` to encrypt your PyPI password in Travis config
   and activate automated deployment on PyPI when you push a new tag to master branch.
 * Test your release
+
   * Ensure you can create the dist using ``make dist``
   * `Sign up for a Test PyPI account`_ (this is different from normal PyPI but
     looks exactly the same)
   * Ensure that ``make test-release`` works
   * View your test release at https://test.pypi.org/project/project_name (or
     similar)
+
 * Release your package by pushing a new tag to master (``git tag -a v0.1.0 -m "Tag version 0.1.0"``), and Travis will automatically deploy your release
 * Add a `requirements.txt` file that specifies the packages you will need for
   your project and their versions. For more info see the `pip docs for requirements files`_.
