@@ -4,6 +4,8 @@ Cookiecutter PyPackage
 
 Cookiecutter_ template for a Python package, customized for DAI-Lab.
 
+This is a slight fork of https://github.com/audreyr/cookiecutter-pypackage.
+
 * GitHub repo: https://github.com/DAI-Lab/cookiecutter-pypackage/
 * Documentation: https://cookiecutter-pypackage.readthedocs.io/
 * Free software: BSD license
