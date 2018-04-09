@@ -1,1 +1,7 @@
-{%- if cookiecutter.support_py2 == 'y' %}six{%- endif %}
+{%- if cookiecutter.command_line_interface == 'y' %}
+# command-line interface
+click>=6.7
+{%- endif %}
+{%- if cookiecutter.support_py2 == 'y' %}
+six
+{%- endif %}
