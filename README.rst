@@ -6,6 +6,8 @@ Cookiecutter_ template for a Python package, customized for DAI-Lab.
 
 This is a slight fork of https://github.com/audreyr/cookiecutter-pypackage.
 
+Why do this stuff? See `Why???`_.
+
 FOR ANY BUGS OR QUESTIONS, CONTACT MICAH SMITH (@micahjsmith).
 
 * GitHub repo: https://github.com/DAI-Lab/cookiecutter-pypackage/
@@ -56,6 +58,7 @@ Then:
 
 4. Configure Travis to run tests and build documentation
 
+
    * Create the repo on GitHub if it is not already there
    * Add the repo to your Travis-CI_ account (https://travis-ci.org/ORG_NAME/PROJECT_NAME)
    * Push a commit and monitor the build
@@ -84,6 +87,106 @@ Then:
    * Add a `requirements.txt` file that specifies the packages you will need for your project and their versions. For more info see the `pip docs for requirements files`_.
 
 For more details, see the `cookiecutter-pypackage tutorial`_.
+
+Why???
+------
+
+Why should you use this? Why do you want these features? Here are some quick and
+dirty answers, that will hopefully get expanded and referenced with appropriate
+links.
+
+You're probably doing some of these things already, like structuring your python
+package in a standard manner, writing README, setup.py, and requirements.txt
+files, and writing tests. This is not enough to (a) distribute your code (b) get
+people to trust your code (c) get people to download your code (d) get people to
+use your code.
+
+Finally, let this template handle the little things. You will avoid the
+following:
+
+* committing ``.pyc`` files or other binary files because you never thought to add
+  a ``.gitignore``
+* omitting a ``LICENSE`` which means that other people cannot legally reuse your
+  software
+* having your tests pass locally but finding that a stranger on the internet
+  can't install your code because they use Python 3.5 and you use Python 3.6
+* having a sequence of 8 commits (``add Travis``, ``see if this fix makes Travis
+  work now``, ``Travis still doesn't work``, etc.) because you are rolling your own
+  configuration for different services one project at a time
+* spending time and effort figuring out how to release your project on PyPI
+* releasing your project on PyPI and finding that people can't install it
+  successfully because you misconfigured one release
+* etc.
+
+Distribution
+~~~~~~~~~~~~
+
+Do you want people to use your software? If so
+
+* you need to make it available on PyPI
+* you need to make it trustworthy with up-to-date testing and documentation that
+  can be verified and referenced
+* you need to signal that it is high-quality by following best practices
+
+It is imperative that ``pip install your_package`` works out of the box for as
+many people as possible, and that they can quickly assess whether your software
+is high-quality and deserves a chance to be used.
+
+Testing
+~~~~~~~
+
+If you're reading this, you should be testing your code. With unittests and
+integration tests if applicable. Full stop.
+
+There are several unit testing frameworks in Python. You can use whatever one
+you want. Unittest in Python 3 is part of the standard library and is pretty
+solid. You can use pytest as a test runner. It's easiest if we are consistent
+across the lab.
+
+But writing and running your tests is just one part of the picture. ``tox`` makes
+sure that your code works/your tests pass on every version of Python you claim
+to support and all other dependencies your require. What is the probability that
+the person who wants to pip install your package is using the same version of
+Python as you are? This is standard in python projects.
+
+Finally, you should run your tests automatically everytime you update your
+software using continuous integration.
+
+Docs
+~~~~
+
+You should document your code.
+
+It is not enough to document your code in docstrings. Users across the world
+should be able to quickly view your documentation on the web.
+
+It is not enough to have your documentation on the web. Built documentation
+should be standardized across the lab with a consistent theme/style to look
+polished.
+
+It is not enough to have a standardized look and feel. Built documentation
+should be automatically updated to reflect the current state of your repository.
+
+Finally, it is not enough to just write docstrings etc. You should also write
+expository documentation: introduction, installation, quick start/basic usage,
+tutorial/advanced usage, examples, faq, how to contribute, API reference.
+
+Dev tools
+~~~~~~~~
+
+Use dev tools to make your life easier.
+
+Want to release a new version of your software?
+
+1. Update your HISTORY file
+2. Use ``bumpversion`` to tag a new version following semantic versioning.
+3. Push your commit and tags to GitHub, and have your CI service automatically
+   deploy a new release to PyPI.
+
+Want to automatically build and deploy your documentation?
+
+1. Literally, do nothing different. If you configure your CI provider
+   correctly, your documentation can be rebuild and redeployed on every commit.
 
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 .. _`Sign up for a Test PyPI account`: https://test.pypi.org/account/register/
