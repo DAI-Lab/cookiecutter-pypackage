@@ -101,8 +101,7 @@ files, and writing tests. This is not enough to (a) distribute your code (b) get
 people to trust your code (c) get people to download your code (d) get people to
 use your code.
 
-Finally, let this template handle the little things. You will avoid the
-following:
+Let this template handle the little things. You will avoid the following:
 
 * committing ``.pyc`` files or other binary files because you never thought to add
   a ``.gitignore``
