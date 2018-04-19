@@ -65,6 +65,11 @@ setup(
     keywords='{{ cookiecutter.project_slug }}',
     name='{{ cookiecutter.project_slug }}',
     packages=find_packages(include=['{{ cookiecutter.project_slug }}', '{{ cookiecutter.project_slug }}.*']),
+{%- if cookiecutter.support_py2 == 'y' %}
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
+{%- else %}
+    python_requires='>=3.4',
+{%- endif %}
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
