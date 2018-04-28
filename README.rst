@@ -24,6 +24,51 @@ Features
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 * Command line interface using Click (optional)
 
+High-Level Walkthrough and Glossary (for newbs)
+----------
+You're about to add all the things to your repo that make your repo a legitimate open-source python project
+that other developers will look at and say "wow, that is a legit looking python project". The things you're
+going to add make it easy for other developers to understand the work you did, for you to test your code, for
+legal issues to be avoided, for easy pushing to public python repos. The things are files and folders and I'll
+give you a quick overview of what they are/do.
+
+Tox (tox.ini): A system that can run all kinds of tests for you. For instance, you can test your code on various 
+versions (Python 2.7, 3.4, 3.5, 3.6) and test your code on linters as well. 
+
+Travis (travis.yml): A continuous integration system. That means every time you push a commit it will simulate
+downloading your project, installing dependencies and running all your tests, to ensure your project
+is continously up to specification.
+
+README (README.md): A file that people should read if they want to understand your project!
+
+setup.py: a file that contains configuration info for installing your project.
+
+PyPI: A website that hosts and allows for easy install of python libraries (this is where pip install 
+downloads from). PyPI and the community of python developers make python the awesome and flexible language
+that you know.
+
+requirements: a list of the packages your code needs to run properly (e.g. numpy, pandas...)
+
+requirements_dev.txt: a file containing the requirements for developers who want to use the code.
+
+requirements_test.txt: a file containing the requirements for anyone who wants to run tests.
+
+AUTHORS.rst: a list of authors
+
+CONTRIBUTING.rst: a list of people who contribute
+
+LICENSE: a legal license that explains how the code can legally be used. (typically we use MIT's open source
+license).
+
+Makefile: a helpful file with pre-defined bash commands. One of those commands is make test-all. In the 
+makefile a bash command is defined that will run all your tests for you.
+
+MANIFEST.in: not totally sure what this does.
+
+gitignore: ignore files matching the regex patterns defined in here. (aka a good way to avoid committing log 
+files or pyc files etc.)
+
+
 Quickstart
 ----------
 
