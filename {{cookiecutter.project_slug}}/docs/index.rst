@@ -1,9 +1,8 @@
-Welcome to {{ cookiecutter.project_name }}'s documentation!
-======================================
+.. include:: readme.rst
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: Contents:
 
    readme
    installation
