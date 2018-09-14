@@ -76,14 +76,12 @@ coverage: ## check code coverage quickly with the default Python
 	$(BROWSER) htmlcov/index.html
 
 clean-docs: ## remove previously built docs
-	rm -f docs/{{ cookiecutter.project_slug }}.rst
-	rm -f docs/modules.rst
+	rm -f docs/api/*.rst
 	$(MAKE) -C docs clean
 
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
-	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
+	sphinx-apidoc --module-first --separate -o docs/api/ {{ cookiecutter.project_slug }}
 	$(MAKE) -C docs html
-	touch docs/_build/html/.nojekyll
 
 viewdocs: docs ## view docs in browser
 	$(BROWSER) docs/_build/html/index.html
