@@ -78,7 +78,7 @@ coverage: ## check code coverage quickly with the default Python
 clean-docs: ## remove previously built docs
 	rm -f docs/{{ cookiecutter.project_slug }}.rst
 	rm -f docs/modules.rst
-	$(MAKE) -C docs clean
+	-$(MAKE) -C docs clean 2>/dev/null
 
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
 	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
@@ -102,5 +102,11 @@ dist: clean ## builds source and wheel package
 	python setup.py bdist_wheel
 	ls -l dist
 
-install: clean ## install the package to the active Python's site-packages
-	python setup.py install
+install: clean-build clean-pyc ## install the package to the active Python's site-packages
+	pip install .
+
+install-test: clean-build clean-pyc ## install the package and test dependencies
+	pip  install .[test]
+
+install-develop: clean-build clean-pyc ## install the package in editable mode and dependencies for development
+	pip install -e .[dev]
