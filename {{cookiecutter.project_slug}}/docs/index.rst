@@ -1,10 +1,10 @@
-.. include:: readme.rst
+.. mdinclude:: readme.rst
 
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   readme
+   Overview <readme>
    installation
    usage
    modules
