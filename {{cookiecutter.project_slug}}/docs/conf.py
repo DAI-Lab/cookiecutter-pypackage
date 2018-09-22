@@ -22,8 +22,6 @@ import os
 import sys
 
 import sphinx_rtd_theme # For read the docs theme
-from recommonmark.parser import CommonMarkParser
-from recommonmark.transform import AutoStructify
 
 sys.path.insert(0, os.path.abspath('..'))
 
@@ -38,7 +36,9 @@ import {{ cookiecutter.project_slug }}
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
+    'm2r',
     'sphinx.ext.autodoc',
+    'sphinx.ext.githubpages',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
 ]
@@ -50,17 +50,13 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 source_suffix = ['.rst', '.md']
 
-source_parsers = {
-    '.md': CommonMarkParser,
-}
-
 # The master toctree document.
 master_doc = 'index'
 
 # General information about the project.
 project = u'{{ cookiecutter.project_name }}'
-copyright = u"{% now 'local', '%Y' %}, {{ cookiecutter.full_name }}"
-author = u"{{ cookiecutter.full_name }}"
+copyright = u'{% now "local", "%Y" %}, {{ cookiecutter.full_name }}'
+author = u'{{ cookiecutter.full_name }}'
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -181,6 +177,3 @@ texinfo_documents = [
      'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-

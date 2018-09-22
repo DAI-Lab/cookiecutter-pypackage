@@ -86,15 +86,13 @@ coverage: ## check code coverage quickly with the default Python
 
 .PHONY: clean-docs
 clean-docs: ## remove previously built docs
-	rm -f docs/{{ cookiecutter.project_slug }}.rst
-	rm -f docs/modules.rst
+	rm -f docs/api/*.rst
 	-$(MAKE) -C docs clean 2>/dev/null  # this fails if sphinx is not yet installed
 
 .PHONY: docs
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
-	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
+	sphinx-apidoc --module-first --separate -o docs/api/ {{ cookiecutter.project_slug }}
 	$(MAKE) -C docs html
-	touch docs/_build/html/.nojekyll
 
 .PHONY: view-docs
 view-docs: docs ## view docs in browser
