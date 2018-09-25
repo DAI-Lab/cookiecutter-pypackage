@@ -189,20 +189,25 @@ Want to automatically build and deploy your documentation?
 Glossary (for newbs)
 --------------------
 
-You're about to add all the things to your repo that make your repo a legitimate open-source python project
-that other developers will look at and say "wow, that is a legit looking python project". The things you're
-going to add make it easy for other developers to understand the work you did, for you to test your code, for
-legal issues to be avoided, for easy pushing to public python repos. The things are files and folders and I'll
-give you a quick overview of what they are/do.
+You're about to add all the things to your repo that make your repo a legitimate
+open-source python project that other developers will look at and say "wow, that
+is a legit looking python project". The things you're going to add make it easy
+for other developers to understand the work you did, for you to test your code,
+for legal issues to be avoided, for easy pushing to public python repos. The
+things are files and folders and I'll give you a quick overview of what they
+are/do.
 
-* Tox_ (tox.ini): A system that can run all kinds of tests for you. For instance, you can test your code on various
-versions (Python 2.7, 3.4, 3.5, 3.6) and test your code on linters as well.
+* Tox_ (tox.ini): A system that can run all kinds of tests for you. For
+  instance, you can test your code on various versions (Python 2.7, 3.4, 3.5,
+  3.6) and test your code on linters as well.
 
-* Travis-CI_ (travis.yml): A continuous integration system. That means every time you push a commit it will simulate
-downloading your project, installing dependencies and running all your tests, to ensure your project
-is continously up to specification.
+* Travis-CI_ (travis.yml): A continuous integration system. That means every
+  time you push a commit it will simulate downloading your project, installing
+  dependencies and running all your tests, to ensure your project is continously
+  up to specification.
 
-* README (README.md): A file that people should read if they want to understand your project!
+* README (README.md): A file that people should read if they want to understand
+  your project!
 
 * reStructuredText: A markup language that is often used for writing
   documentation in Python projects. It is more powerful than Markdown but a bit
@@ -240,8 +245,8 @@ is continously up to specification.
 * MANIFEST.in: Loosely, this file lists non-Python source files that should be
   included in the distribution you upload to PyPI. See Manifest.in_.
 
-* .gitignore: Ignore files matching the regex patterns defined in here. (*A.k.a.* a
-  good way to avoid committing log files or pyc files etc.)
+* .gitignore: Ignore files matching the regex patterns defined in here.
+  (*A.k.a.* a good way to avoid committing log files or pyc files etc.)
 
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 .. _`Sign up for a Test PyPI account`: https://test.pypi.org/account/register/
