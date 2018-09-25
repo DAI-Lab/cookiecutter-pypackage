@@ -29,35 +29,30 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-.PHONY: clean
-clean: clean-build clean-pyc clean-test clean-docs ## remove all build, test, coverage, docs and Python artifacts
+.PHONY: install
+install: clean-build clean-pyc ## install the package to the active Python's site-packages
+	pip install .
 
-.PHONY: clean-build
-clean-build: ## remove build artifacts
-	rm -fr build/
-	rm -fr dist/
-	rm -fr .eggs/
-	find . -name '*.egg-info' -exec rm -fr {} +
-	find . -name '*.egg' -exec rm -f {} +
+.PHONY: install-test
+install-test: clean-build clean-pyc ## install the package and test dependencies
+	pip  install .[test]
 
-.PHONY: clean-pyc
-clean-pyc: ## remove Python file artifacts
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
-	find . -name '*~' -exec rm -f {} +
-	find . -name '__pycache__' -exec rm -fr {} +
-
-.PHONY: clean-test
-clean-test: ## remove test and coverage artifacts
-	rm -fr .tox/
-	rm -f .coverage
-	rm -fr htmlcov/
-	rm -fr .pytest_cache
+.PHONY: test
+test: ## run tests quickly with the default Python
+	python -m pytest
 
 .PHONY: lint
 lint: ## check style with flake8 and isort
 	flake8 {{ cookiecutter.project_slug }} tests
 	isort -c --recursive {{ cookiecutter.project_slug }} tests
+
+.PHONY: install-develop
+install-develop: clean-build clean-pyc ## install the package in editable mode and dependencies for development
+	pip install -e .[dev]
+
+.PHONY: test-all
+test-all: ## run tests on every Python version with tox
+	tox
 
 .PHONY: fix-lint
 fix-lint: ## fix lint issues using autoflake, autopep8, and isort
@@ -69,25 +64,12 @@ fix-lint: ## fix lint issues using autoflake, autopep8, and isort
 	autopep8 --in-place --recursive --aggressive tests
 	isort --apply --atomic --recursive tests
 
-.PHONY: test
-test: ## run tests quickly with the default Python
-	python -m pytest
-
-.PHONY: test-all
-test-all: ## run tests on every Python version with tox
-	tox
-
 .PHONY: coverage
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source {{ cookiecutter.project_slug }} -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
-
-.PHONY: clean-docs
-clean-docs: ## remove previously built docs
-	rm -f docs/api/*.rst
-	-$(MAKE) -C docs clean 2>/dev/null  # this fails if sphinx is not yet installed
 
 .PHONY: docs
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
@@ -116,14 +98,32 @@ dist: clean ## builds source and wheel package
 	python setup.py bdist_wheel
 	ls -l dist
 
-.PHONY: install
-install: clean-build clean-pyc ## install the package to the active Python's site-packages
-	pip install .
+.PHONY: clean
+clean: clean-build clean-pyc clean-test clean-docs ## remove all build, test, coverage, docs and Python artifacts
 
-.PHONY: install-test
-install-test: clean-build clean-pyc ## install the package and test dependencies
-	pip  install .[test]
+.PHONY: clean-build
+clean-build: ## remove build artifacts
+	rm -fr build/
+	rm -fr dist/
+	rm -fr .eggs/
+	find . -name '*.egg-info' -exec rm -fr {} +
+	find . -name '*.egg' -exec rm -f {} +
 
-.PHONY: install-develop
-install-develop: clean-build clean-pyc ## install the package in editable mode and dependencies for development
-	pip install -e .[dev]
+.PHONY: clean-pyc
+clean-pyc: ## remove Python file artifacts
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
+
+.PHONY: clean-test
+clean-test: ## remove test and coverage artifacts
+	rm -fr .tox/
+	rm -f .coverage
+	rm -fr htmlcov/
+	rm -fr .pytest_cache
+
+.PHONY: clean-docs
+clean-docs: ## remove previously built docs
+	rm -f docs/api/*.rst
+	-$(MAKE) -C docs clean 2>/dev/null  # this fails if sphinx is not yet installed
