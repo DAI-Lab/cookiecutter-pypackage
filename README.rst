@@ -2,7 +2,7 @@
 Cookiecutter PyPackage
 ======================
 
-Cookiecutter_ template for a Python package, customized for DAI-Lab.
+Cookiecutter_ template for a Python package, customized for MIT DAI Lab.
 
 This is a slight fork of https://github.com/audreyr/cookiecutter-pypackage.
 
@@ -186,6 +186,63 @@ Want to automatically build and deploy your documentation?
 1. Literally, do nothing different. If you configure your CI provider
    correctly, your documentation can be rebuild and redeployed on every commit.
 
+Glossary (for newbs)
+--------------------
+
+You're about to add all the things to your repo that make your repo a legitimate open-source python project
+that other developers will look at and say "wow, that is a legit looking python project". The things you're
+going to add make it easy for other developers to understand the work you did, for you to test your code, for
+legal issues to be avoided, for easy pushing to public python repos. The things are files and folders and I'll
+give you a quick overview of what they are/do.
+
+* Tox_ (tox.ini): A system that can run all kinds of tests for you. For instance, you can test your code on various
+versions (Python 2.7, 3.4, 3.5, 3.6) and test your code on linters as well.
+
+* Travis-CI_ (travis.yml): A continuous integration system. That means every time you push a commit it will simulate
+downloading your project, installing dependencies and running all your tests, to ensure your project
+is continously up to specification.
+
+* README (README.md): A file that people should read if they want to understand your project!
+
+* reStructuredText: A markup language that is often used for writing
+  documentation in Python projects. It is more powerful than Markdown but a bit
+  harder to learn. See `reStructuredText reference`_.
+
+* setup.py: a file that contains configuration info for installing your project.
+  Among many other things, our version of setup.py includes lists of
+  dependencies for people who want to run the tests and dependencies developers
+  who want to hack on the project, build documentation, and create new releases.
+  See setup.py_.
+
+* setup.cfg: This is a general configuration file that can be read by all sorts
+  of development tools, including ``setuptools``, ``flake8``, ``isort``,
+  ``bumpversion``, and more. It uses the `INI file format`_.
+
+* PyPI_: A website that hosts and allows for easy install of python libraries
+  (this is where pip install downloads from). PyPI and the community of python
+  developers make python the awesome and flexible language that you know.
+
+* AUTHORS.rst: A list of authors.
+
+* CONTRIBUTING.rst: Information for people interested in contributing bug
+  reports, new features, documentation, and more.
+
+* HISTORY.md: A list of previous releases, including new features introduced and
+  breaking changes.
+
+* LICENSE: A legal license that explains how the code can legally be used.
+  (Typically we use MIT's open source license).
+
+* Makefile: A helpful file with pre-defined bash commands. Try running ``make
+  help`` to see the list of commands, including ones that will run your tests
+  for you.
+
+* MANIFEST.in: Loosely, this file lists non-Python source files that should be
+  included in the distribution you upload to PyPI. See Manifest.in_.
+
+* .gitignore: Ignore files matching the regex patterns defined in here. (*A.k.a.* a
+  good way to avoid committing log files or pyc files etc.)
+
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 .. _`Sign up for a Test PyPI account`: https://test.pypi.org/account/register/
 .. _Register: https://packaging.python.org/distributing/#register-your-project
@@ -195,4 +252,8 @@ Want to automatically build and deploy your documentation?
 .. _Tox: http://testrun.org/tox/
 .. _Sphinx: http://sphinx-doc.org/
 .. _Bumpversion: https://github.com/peritus/bumpversion
-.. _PyPi: https://pypi.python.org/pypi
+.. _PyPI: https://pypi.python.org/pypi
+.. _`INI file format`: https://en.wikipedia.org/wiki/INI_file
+.. _`setup.py`: https://packaging.python.org/tutorials/distributing-packages/#setup-py
+.. _`MANIFEST.in`: https://packaging.python.org/tutorials/distributing-packages/#manifest-in
+.. _`reStructuredText reference`: https://gist.github.com/ionelmc/e876b73e2001acd2140f
