@@ -74,6 +74,11 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for 
 
     $ git checkout -b name-of-your-bugfix-or-feature
 
+   Try to use the naming scheme of prefixing your branch with ``gh-X`` where X is
+   the associated issue, such as ``gh-3-fix-foo-bug``. And if you are not
+   developing on your own fork, further prefix the branch with your Github
+   username, like ``githubusername/gh-3-fix-foo-bug``.
+
    Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass flake8 and the
@@ -100,7 +105,7 @@ Before you submit a pull request, check that it meets these guidelines:
 1. The pull request should include tests.
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
-   feature to the list in README.rst.
+   feature to the documentation in an appropriate place.
 3. The pull request should work for Python {%- if cookiecutter.support_py2 == 'y' %}2.7, {%- endif %}3.4, 3.5 and 3.6, and for PyPy. Check
    https://travis-ci.org/{{ cookiecutter.github_orgname }}/{{ cookiecutter.project_slug }}/pull_requests
    and make sure that the tests pass for all supported Python versions.
