@@ -7,7 +7,17 @@
    Overview <readme>
    installation
    usage
-   modules
+
+.. toctree::
+   :caption: Advanced Usage
+   :hidden:
+
+   API Reference <api/{{ cookiecutter.project_slug }}>
+
+.. toctree::
+   :caption: Development Notes
+   :hidden:
+
    contributing
    {% if cookiecutter.create_author_file == 'y' -%}authors
    {% endif -%}history
