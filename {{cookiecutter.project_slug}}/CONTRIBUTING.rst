@@ -100,7 +100,7 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_name }}` for 
    If you want to view how your documentation will look like when it is published, you can
    generate and view the docs with this command::
 
-    $ make viewdocs
+    $ make view-docs
 
 8. Commit your changes and push your branch to GitHub::
 
@@ -122,7 +122,7 @@ Before you submit a pull request, check that it meets these guidelines:
 3. The pull request should include unit tests that cover all the changed code
 4. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
-   feature to the list in README.rst.
+   feature to the documentation in an appropriate place.
 5. The pull request should work for all the supported Python versions. Check the `Travis Build
    Status page`_ and make sure that all the checks pass.
 
@@ -177,7 +177,7 @@ The process of releasing a new version involves several steps combining both ``g
 1. Merge what is in ``master`` branch into ``stable`` branch.
 2. Update the version in ``setup.cfg``, ``{{ cookiecutter.project_slug }}/__init__.py`` and
    ``HISTORY.md`` files.
-3. Create a new TAG pointing at the corresponding commit in ``stable`` branch.
+3. Create a new git tag pointing at the corresponding commit in ``stable`` branch.
 4. Merge the new commit from ``stable`` into ``master``.
 5. Update the version in ``setup.cfg`` and ``{{ cookiecutter.project_slug }}/__init__.py``
    to open the next development iteration.
