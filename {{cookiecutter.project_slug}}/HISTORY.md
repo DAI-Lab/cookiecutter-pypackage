@@ -1,5 +1,5 @@
 # History
 
-## {{ cookiecutter.version }} ({% now 'local' %})
+## {{ cookiecutter.version.replace('-dev', '') }}
 
 * First release on PyPI.
