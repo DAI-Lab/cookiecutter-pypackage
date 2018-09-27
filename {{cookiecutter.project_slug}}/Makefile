@@ -82,7 +82,7 @@ view-docs: docs ## view docs in browser
 
 .PHONY: serve-docs
 serve-docs: view-docs ## compile the docs watching for changes
-	watchmedo shell-command -W -R -D -p '*.rst' -c '$(MAKE) docs' .
+	watchmedo shell-command -W -R -D -p '*.rst;*.md' -c '$(MAKE) -C docs html' .
 
 .PHONY: dist
 dist: clean ## builds source and wheel package
@@ -173,4 +173,4 @@ clean-test: ## remove test artifacts
 .PHONY: clean-docs
 clean-docs: ## remove previously built docs
 	rm -f docs/api/*.rst
-	$(MAKE) -C docs clean 2>/dev/null  # this fails if sphinx is not yet installed
+	-$(MAKE) -C docs clean 2>/dev/null  # this fails if sphinx is not yet installed
