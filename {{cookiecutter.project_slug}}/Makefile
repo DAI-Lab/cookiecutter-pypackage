@@ -35,7 +35,7 @@ install: clean-build clean-pyc ## install the package to the active Python's sit
 
 .PHONY: install-test
 install-test: clean-build clean-pyc ## install the package and test dependencies
-	pip  install .[test]
+	pip install .[test]
 
 .PHONY: test
 test: ## run tests quickly with the default Python
@@ -81,16 +81,8 @@ view-docs: docs ## view docs in browser
 	$(BROWSER) docs/_build/html/index.html
 
 .PHONY: serve-docs
-serve-docs: docs ## compile the docs watching for changes
-	watchmedo shell-command -p '*.rst;*.md' -c '$(MAKE) -C docs html' -R -D .
-
-.PHONY: release
-release: dist ## package and upload a release
-	twine upload dist/*
-
-.PHONY: test-release
-test-release: dist ## package and upload a release on TestPyPI
-	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+serve-docs: view-docs ## compile the docs watching for changes
+	watchmedo shell-command -W -R -D -p '*.rst;*.md' -c '$(MAKE) -C docs html' .
 
 .PHONY: dist
 dist: clean ## builds source and wheel package
@@ -98,8 +90,59 @@ dist: clean ## builds source and wheel package
 	python setup.py bdist_wheel
 	ls -l dist
 
+.PHONY: test-publish
+test-publish: dist ## package and upload a release on TestPyPI
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+.PHONY: publish
+publish: dist ## package and upload a release
+	twine upload dist/*
+
+.PHONY: bumpversion-release
+bumpversion-release: ## Merge master to stable and bumpversion release
+	git checkout stable
+	git merge --no-ff master -m"make release-tag: Merge branch 'master' into stable"
+	bumpversion release
+	git push --tags origin stable
+
+.PHONY: bumpversion-patch
+bumpversion-patch: ## Merge stable to master and bumpversion patch
+	git checkout master
+	git merge stable
+	bumpversion --no-tag patch
+	git push
+
+.PHONY: bumpversion-minor
+bumpversion-minor: ## Bump the version the next minor skipping the release
+	bumpversion --no-tag minor
+
+.PHONY: bumpversion-major
+bumpversion-major: ## Bump the version the next major skipping the release
+	bumpversion --no-tag major
+
+CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+CHANGELOG_LINES := $(shell git diff HEAD..stable HISTORY.md | wc -l)
+
+.PHONY: check-release
+check-release: ## Check if the release can be made
+ifneq ($(CURRENT_BRANCH),master)
+	$(error Please make the release from master branch\n)
+endif
+ifeq ($(CHANGELOG_LINES),0)
+	$(error Please insert the release notes in HISTORY.md before releasing)
+endif
+
+.PHONY: release
+release: check-release bumpversion-release publish bumpversion-patch
+
+.PHONY: release-minor
+release-minor: check-release bumpversion-minor release
+
+.PHONY: release-major
+release-major: check-release bumpversion-major release
+
 .PHONY: clean
-clean: clean-build clean-pyc clean-test clean-docs ## remove all build, test, coverage, docs and Python artifacts
+clean: clean-build clean-pyc clean-test clean-coverage clean-docs ## remove all build, test, coverage, docs and Python artifacts
 
 .PHONY: clean-build
 clean-build: ## remove build artifacts
@@ -116,11 +159,15 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
-.PHONY: clean-test
-clean-test: ## remove test and coverage artifacts
-	rm -fr .tox/
+.PHONY: clean-coverage
+clean-coverage: ## remove coverage artifacts
 	rm -f .coverage
+	rm -f .coverage.*
 	rm -fr htmlcov/
+
+.PHONY: clean-test
+clean-test: ## remove test artifacts
+	rm -fr .tox/
 	rm -fr .pytest_cache
 
 .PHONY: clean-docs
