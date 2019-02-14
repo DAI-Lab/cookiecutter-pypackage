@@ -56,7 +56,11 @@ master_doc = 'index'
 # General information about the project.
 project = u'{{ cookiecutter.project_name }}'
 copyright = u'{% now "local", "%Y" %}, {{ cookiecutter.full_name }}'
-author = u'{{ cookiecutter.full_name }}'
+{%- if cookiecutter.github_username == cookiecutter.github_orgname %}
+author = u'{{ cookiecutter.full_name.replace("\'", "\\\'") }}'
+{%- else %}
+author = u'MIT Data To AI Lab'
+{%- endif %}
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout

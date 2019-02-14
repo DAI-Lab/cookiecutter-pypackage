@@ -59,8 +59,13 @@ development_requirements = [
 } %}
 
 setup(
-    author="{{ cookiecutter.full_name.replace('\"', '\\\"') }}",
+{%- if cookiecutter.github_username == cookiecutter.github_orgname %}
+    author='{{ cookiecutter.full_name.replace("\'", "\\\'") }}',
     author_email='{{ cookiecutter.email }}',
+{%- else %}
+    author='MIT Data To AI Lab',
+    author_email='dailabmit@gmail.com',
+{%- endif %}
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -69,7 +74,7 @@ setup(
 {%- endif %}
         'Natural Language :: English',
 {%- if cookiecutter.support_py2 == 'y' %}
-        "Programming Language :: Python :: 2",
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
 {%- endif %}
         'Programming Language :: Python :: 3',
@@ -78,7 +83,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    description="{{ cookiecutter.project_short_description }}",
+    description='{{ cookiecutter.project_short_description.replace("\'", "\\\'") }}',
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
@@ -93,7 +98,7 @@ setup(
     install_package_data=True,
     install_requires=requirements,
 {%- if cookiecutter.open_source_license in license_classifiers %}
-    license="{{ cookiecutter.open_source_license }}",
+    license='{{ cookiecutter.open_source_license }}',
 {%- endif %}
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/markdown',
