@@ -2,7 +2,7 @@
   "full_name": "Your Name",
   "email": "email@mit.edu",
   "github_username": "username",
-  "github_orgname": ["DAI-Lab", "HDI-Project", "{{ cookiecutter.github_username }}"],
+  "github_orgname": ["DAI-Lab", "HDI-Project", "D3-AI", "{{ cookiecutter.github_username }}"],
   "project_name": "Python Boilerplate",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "Python Boilerplate contains all the boilerplate you need to create a Python package.",
