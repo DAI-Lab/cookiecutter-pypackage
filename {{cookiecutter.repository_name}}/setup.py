@@ -59,13 +59,8 @@ development_requirements = [
 } %}
 
 setup(
-{%- if cookiecutter.github_username == cookiecutter.github_orgname %}
-    author='{{ cookiecutter.full_name.replace("\'", "\\\'") }}',
-    author_email='{{ cookiecutter.email }}',
-{%- else %}
-    author='MIT Data To AI Lab',
-    author_email='dailabmit@gmail.com',
-{%- endif %}
+    author='{{ cookiecutter.license_owner }}',
+    author_email='{{ cookiecutter.license_owner_email }}',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -87,7 +82,7 @@ setup(
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
-            '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main',
+            '{{ cookiecutter.package_name }}={{ cookiecutter.project_slug }}.cli:main',
         ],
     },
     {%- endif %}
@@ -103,8 +98,8 @@ setup(
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/markdown',
     include_package_data=True,
-    keywords='{{ cookiecutter.project_slug }}',
-    name='{{ cookiecutter.project_slug }}',
+    keywords='{{ cookiecutter.project_slug }} {{ cookiecutter.package_name }} {{ cookiecutter.project_name }}',
+    name='{{ cookiecutter.package_name }}',
     packages=find_packages(include=['{{ cookiecutter.project_slug }}', '{{ cookiecutter.project_slug }}.*']),
 {%- if cookiecutter.support_py2 == 'y' %}
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
@@ -114,7 +109,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/{{ cookiecutter.github_orgname }}/{{ cookiecutter.project_slug }}',
+    url='https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}',
     version='{{ cookiecutter.version }}',
     zip_safe=False,
 )

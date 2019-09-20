@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# {{ cookiecutter.project_slug }} documentation build configuration file, created by
+# {{ cookiecutter.project_name }} documentation build configuration file, created by
 # sphinx-quickstart on Fri Jun  9 13:47:02 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -55,12 +55,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'{{ cookiecutter.project_name }}'
-copyright = u'{% now "local", "%Y" %}, {{ cookiecutter.full_name }}'
-{%- if cookiecutter.github_username == cookiecutter.github_orgname %}
-author = u'{{ cookiecutter.full_name.replace("\'", "\\\'") }}'
-{%- else %}
-author = u'MIT Data To AI Lab'
-{%- endif %}
+copyright = u'{% now 'local', '%Y' %}, {{ cookiecutter.license_owner }}'
+author = u'{{ cookiecutter.license_owner }}'
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -101,8 +97,8 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # Readthedocs additions
 html_context = {
     'display_github': True,
-    'github_user': '{{ cookiecutter.github_orgname }}',
-    'github_repo': '{{ cookiecutter.project_slug }}',
+    'github_user': '{{ cookiecutter.github_owner }}',
+    'github_repo': '{{ cookiecutter.repository_name }}',
     'github_version': 'master',
     'conf_py_path': '/docs/',
 }
@@ -153,7 +149,7 @@ latex_elements = {
 latex_documents = [
     (master_doc, '{{ cookiecutter.project_slug }}.tex',
      u'{{ cookiecutter.project_name }} Documentation',
-     u'{{ cookiecutter.full_name }}', 'manual'),
+     u'{{ cookiecutter.license_owner }}', 'manual'),
 ]
 
 

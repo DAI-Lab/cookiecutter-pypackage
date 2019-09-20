@@ -31,7 +31,7 @@ deploy:
       secure: PLEASE_REPLACE_ME
     on:
       tags: true
-      repo: {{ cookiecutter.github_orgname }}/{{ cookiecutter.project_slug }}
+      repo: {{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}
       python: 3.6
 {%- endif %}
 {% if cookiecutter.use_ghpages_deployment_with_travis == 'y' %}
@@ -39,7 +39,7 @@ deploy:
   # commit
   # Follow the instructions at https://docs.travis-ci.com/user/deployment/pages/
   # to setup a personal deployment token and then provide it as a secure
-  # environment variable at https://travis-ci.org/{{ cookiecutter.github_orgname }}/{{ cookiecutter.project_slug }}/settings
+  # environment variable at https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/settings
   - provider: pages
     skip-cleanup: true
     github-token: "$GITHUB_TOKEN"
