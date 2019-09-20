@@ -120,20 +120,30 @@ bumpversion-minor: ## Bump the version the next minor skipping the release
 bumpversion-major: ## Bump the version the next major skipping the release
 	bumpversion --no-tag major
 
+.PHONY: bumpversion-candidate
+bumpversion-candidate: ## Bump the version to the next candidate
+	bumpversion candidate --no-tag
+
 CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null)
 CHANGELOG_LINES := $(shell git diff HEAD..origin/stable HISTORY.md 2>&1 | wc -l)
 
-.PHONY: check-release
-check-release: ## Check if the release can be made
+.PHONY: check-master
+check-master: ## Check if we are in master branch
 ifneq ($(CURRENT_BRANCH),master)
 	$(error Please make the release from master branch\n)
 endif
+
+.PHONY: check-history
+check-history: ## Check if HISTORY.md has been modified
 ifeq ($(CHANGELOG_LINES),0)
 	$(error Please insert the release notes in HISTORY.md before releasing)
 endif
 
 .PHONY: release
 release: check-release bumpversion-release publish bumpversion-patch
+
+.PHONY: release-candidate
+release-candidate: check-master publish bumpversion-candidate
 
 .PHONY: release-minor
 release-minor: check-release bumpversion-minor release
