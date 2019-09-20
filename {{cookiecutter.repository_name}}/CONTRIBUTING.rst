@@ -62,13 +62,13 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_name }}` for 
 1. Fork the `{{ cookiecutter.project_name }}` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/{{ cookiecutter.project_slug }}.git
+    $ git clone git@github.com:your_name_here/{{ cookiecutter.repository_name }}.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed,
    this is how you set up your fork for local development::
 
-    $ mkvirtualenv {{ cookiecutter.project_slug }}
-    $ cd {{ cookiecutter.project_slug }}/
+    $ mkvirtualenv {{ cookiecutter.repository_name }}
+    $ cd {{ cookiecutter.repository_name }}/
     $ make install-develop
 
 4. Create a branch for local development::
@@ -201,6 +201,6 @@ Once this is done, run of the following commands:
 
     make release-major
 
-.. _GitHub issues page: https://github.com/{{ cookiecutter.github_orgname }}/{{ cookiecutter.project_slug }}/issues
-.. _Travis Build Status page: https://travis-ci.org/{{ cookiecutter.github_orgname }}/{{ cookiecutter.project_slug }}/pull_requests
+.. _GitHub issues page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/issues
+.. _Travis Build Status page: https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/pull_requests
 .. _Google docstrings style: https://google.github.io/styleguide/pyguide.html?showone=Comments#Comments
