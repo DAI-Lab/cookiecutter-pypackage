@@ -16,7 +16,7 @@ matrix:
       sudo: required
 
 # Command to install dependencies
-{%- if cookiecutter.integrate_codecov == 'y' %}
+{%- if cookiecutter.use_codecov == 'y' %}
 install: pip install -U tox-travis codecov
 
 after_success: codecov
