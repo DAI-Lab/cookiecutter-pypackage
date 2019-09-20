@@ -11,22 +11,21 @@ with open('README.md') as readme_file:
 with open('HISTORY.md') as history_file:
     history = history_file.read()
 
-requirements = [
+install_requires = [
     {%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %}
     {%- if cookiecutter.support_py2 == 'y' %}'six',{%- endif %}
 ]
 
-setup_requirements = [
+setup_requires = [
     'pytest-runner>=2.11.1',
 ]
 
-test_requirements = [
-    'coverage>=4.5.1',
+tests_require = [
     'pytest>=3.4.2',
-    'tox>=2.9.1',
+    'pytest-cov>=2.6.0',
 ]
 
-development_requirements = [
+development_requires = [
     # general
     'bumpversion>=0.5.3',
     'pip>=9.0.1',
@@ -38,16 +37,20 @@ development_requirements = [
     'sphinx_rtd_theme>=0.2.4',
 
     # style check
-    'flake8>=3.5.0',
+    'flake8>=3.7.7',
     'isort>=4.3.4',
 
     # fix style issues
-    'autoflake>=1.1',
-    'autopep8>=1.3.5',
+    'autoflake>=1.2',
+    'autopep8>=1.4.3',
 
     # distribute on PyPI
     'twine>=1.10.0',
     'wheel>=0.30.0',
+
+    # Advanced testing
+    'coverage>=4.5.1',
+    'tox>=2.9.1',
 ]
 
 {%- set license_classifiers = {
@@ -87,11 +90,11 @@ setup(
     },
     {%- endif %}
     extras_require={
-        'test': test_requirements,
-        'dev': development_requirements + test_requirements,
+        'test': tests_require,
+        'dev': development_requires + tests_require,
     },
     install_package_data=True,
-    install_requires=requirements,
+    install_requires=install_requires,
 {%- if cookiecutter.open_source_license in license_classifiers %}
     license='{{ cookiecutter.open_source_license }}',
 {%- endif %}
@@ -106,9 +109,9 @@ setup(
 {%- else %}
     python_requires='>=3.4',
 {%- endif %}
-    setup_requires=setup_requirements,
+    setup_requires=setup_requires,
     test_suite='tests',
-    tests_require=test_requirements,
+    tests_require=tests_require,
     url='https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}',
     version='{{ cookiecutter.version }}',
     zip_safe=False,
