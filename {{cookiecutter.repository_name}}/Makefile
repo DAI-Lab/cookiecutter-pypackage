@@ -139,6 +139,9 @@ ifeq ($(CHANGELOG_LINES),0)
 	$(error Please insert the release notes in HISTORY.md before releasing)
 endif
 
+.PHONY: check-release
+check-release: check-master check-history ## Check if the release can be made
+
 .PHONY: release
 release: check-release bumpversion-release publish bumpversion-patch
 
