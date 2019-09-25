@@ -14,7 +14,7 @@
 
 {{ cookiecutter.project_short_description }}
 
-{% if {{ cookiecutter.open_source_license }} == 'Not open source' -%}
+{% if cookiecutter.open_source_license == 'Not open source' -%}
 - Free software: {{ cookiecutter.open_source_license }}
 {% endif -%}
 - Documentation: https://{{ cookiecutter.github_owner }}.github.io/{{ cookiecutter.repository_name }}
