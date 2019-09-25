@@ -201,6 +201,24 @@ Once this is done, run of the following commands:
 
     make release-major
 
+Release Candidates
+~~~~~~~~~~~~~~~~~~
+
+Sometimes it is necessary or convenient to upload a release candidate to PyPi as a pre-release,
+in order to make some of the new features available for testing on other projects before they
+are included in an actual full-blown release.
+
+In order to perform such an action, you can execute::
+
+    make release-candidate
+
+This will perform the following actions:
+
+1. Build and upload the current version to PyPi as a pre-release, with the format ``X.Y.Z.devN``
+
+2. Bump the current version to the next release candidate, ``X.Y.Z.dev(N+1)``
+
+
 .. _GitHub issues page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/issues
 .. _Travis Build Status page: https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/pull_requests
 .. _Google docstrings style: https://google.github.io/styleguide/pyguide.html?showone=Comments#Comments
