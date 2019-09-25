@@ -218,6 +218,19 @@ This will perform the following actions:
 
 2. Bump the current version to the next release candidate, ``X.Y.Z.dev(N+1)``
 
+After this is done, the new pre-release can be installed by including the ``dev`` section in the
+dependency specification, either in ``setup.py``::
+
+    install_requires = [
+        ...
+        '{{ cookiecutter.package_name }}>=X.Y.Z.dev',
+        ...
+    ]
+
+or in command line::
+
+    pip install '{{ cookiecutter.package_name }}>=X.Y.Z.dev'
+
 
 .. _GitHub issues page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/issues
 .. _Travis Build Status page: https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/pull_requests
