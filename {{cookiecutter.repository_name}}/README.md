@@ -77,29 +77,7 @@ make install
 If you want to contribute to the project, a few more steps are required to make the project ready
 for development.
 
-First, please head to [the GitHub page of the project](https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
-and make a fork of the project under you own username by clicking on the **fork** button on the
-upper right corner of the page.
-
-Afterwards, clone your fork and create a branch from master with a descriptive name that includes
-the number of the issue that you are going to work on:
-
-```bash
-git clone git@github.com:{your username}/{{ cookiecutter.repository_name }}.git
-cd {{ cookiecutter.repository_name }}
-git branch issue-xx-cool-new-feature master
-git checkout issue-xx-cool-new-feature
-```
-
-Finally, install the project with the following command, which will install some additional
-dependencies for code linting and testing.
-
-```bash
-make install-develop
-```
-
-Make sure to use them regularly while developing by running the commands `make lint` and
-`make test`.
+Please head to the [Contributing Guide](CONTRIBUTING.rst) for more details about this process.
 
 # Quickstart
 
@@ -112,5 +90,6 @@ TODO: Provide a step by step guide here.
 
 # What's next?
 
-For more details about **{{ cookiecutter.project_name }}** and all its possibilities and features, please check the
-[documentation site](https://{{ cookiecutter.github_owner }}.github.io/{{ cookiecutter.repository_name }}/).
+For more details about **{{ cookiecutter.project_name }}** and all its possibilities
+and features, please check the [documentation site](
+https://{{ cookiecutter.github_owner }}.github.io/{{ cookiecutter.repository_name }}/).
