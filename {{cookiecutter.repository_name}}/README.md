@@ -77,7 +77,8 @@ make install
 If you want to contribute to the project, a few more steps are required to make the project ready
 for development.
 
-Please head to the [Contributing Guide](CONTRIBUTING.rst) for more details about this process.
+Please head to the [Contributing Guide](https://{{ cookiecutter.github_owner }}.github.io/{{ cookiecutter.repository_name }}/contributing.html#get-started)
+for more details about this process.
 
 # Quickstart
 
