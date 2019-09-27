@@ -32,7 +32,7 @@ TODO: Provide a short overview of the project here.
 
 Also, although it is not strictly required, the usage of a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 is highly recommended in order to avoid interfering with other software installed in the system
-where **{{ cookiecutter.project_name }}** is run.
+in which **{{ cookiecutter.project_name }}** is run.
 
 These are the minimum commands needed to create a virtualenv using python3.6 for **{{ cookiecutter.project_name }}**:
 
@@ -41,13 +41,13 @@ pip install virtualenv
 virtualenv -p $(which python3.6) {{ cookiecutter.repository_name }}-venv
 ```
 
-Afterwards, you have to execute this command to have the virtualenv activated:
+Afterwards, you have to execute this command to activate the virtualenv:
 
 ```bash
 source {{ cookiecutter.repository_name }}-venv/bin/activate
 ```
 
-Remember about executing it every time you start a new console to work on **{{ cookiecutter.project_name }}**!
+Remember to execute it every time you start a new console to work on **{{ cookiecutter.project_name }}**!
 
 ## Install with pip
 
@@ -58,7 +58,7 @@ After creating the virtualenv and activating it, we recommend using
 pip install {{ cookiecutter.package_name }}
 ```
 
-This will pull and install the latest stable release from [PyPi](https://pypi.org/).
+This will pull and install the latest stable release from [PyPI](https://pypi.org/).
 
 ## Install from source
 
