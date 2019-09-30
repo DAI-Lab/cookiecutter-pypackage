@@ -3,12 +3,13 @@
 <i>An open source project from Data to AI Lab at MIT.</i>
 </p>
 
-[![PyPI Shield](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg)](https://pypi.python.org/pypi/{{ cookiecutter.package_name }})
+<!-- Uncomment these lines after releasing the package to PyPI for version and downloads badges -->
+<!--[![PyPI Shield](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg)](https://pypi.python.org/pypi/{{ cookiecutter.package_name }})-->
+<!--[![Downloads](https://pepy.tech/badge/{{ cookiecutter.package_name }})](https://pepy.tech/project/{{ cookiecutter.package_name }})-->
 [![Travis CI Shield](https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}.svg?branch=master)](https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
 {%- if cookiecutter.use_codecov == 'y' %}
 [![Coverage Status](https://codecov.io/gh/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/branch/master/graph/badge.svg)](https://codecov.io/gh/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
 {%- endif %}
-[![Downloads](https://pepy.tech/badge/{{ cookiecutter.package_name }})](https://pepy.tech/project/{{ cookiecutter.package_name }})
 
 # {{ cookiecutter.project_name }}
 
@@ -49,7 +50,8 @@ source {{ cookiecutter.repository_name }}-venv/bin/activate
 
 Remember to execute it every time you start a new console to work on **{{ cookiecutter.project_name }}**!
 
-## Install with pip
+<!-- Uncomment this section after releasing the package to PyPI for installation instructions
+## Install from PyPI
 
 After creating the virtualenv and activating it, we recommend using
 [pip](https://pip.pypa.io/en/stable/) in order to install **{{ cookiecutter.project_name }}**:
@@ -59,10 +61,11 @@ pip install {{ cookiecutter.package_name }}
 ```
 
 This will pull and install the latest stable release from [PyPI](https://pypi.org/).
+-->
 
 ## Install from source
 
-Alternatively, with your virtualenv activated, you can clone the repository and install it from
+With your virtualenv activated, you can clone the repository and install it from
 source by running `make install` on the `stable` branch:
 
 ```bash
@@ -85,9 +88,7 @@ for more details about this process.
 In this short tutorial we will guide you through a series of steps that will help you
 getting started with **{{ cookiecutter.project_name }}**.
 
-## 1. TODO: Put a title here
-
-TODO: Provide a step by step guide here.
+TODO: Create a step by step guide here.
 
 # What's next?
 
