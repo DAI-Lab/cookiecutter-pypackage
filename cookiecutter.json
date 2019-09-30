@@ -11,7 +11,7 @@
   "license_owner": "{{ 'MIT Data To AI Lab' if cookiecutter.github_username != cookiecutter.github_owner else cookiecutter.full_name.replace(\"\\'\", \"\\\\\\'\") }}",
   "license_owner_email": "{{ 'dailabmit@gmail.com' if cookiecutter.github_username != cookiecutter.github_owner else cookiecutter.email }}",
   "pypi_username": "{{ 'mit_dai_lab' if cookiecutter.github_username != cookiecutter.github_owner else cookiecutter.github_username }}",
-  "version": "0.1.0",
+  "version": "0.1.0.dev0",
   "support_py2": "n",
   "use_pypi_deployment_with_travis": "y",
   "use_ghpages_deployment_with_travis": "y",
