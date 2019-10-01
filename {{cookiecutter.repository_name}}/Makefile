@@ -73,7 +73,7 @@ coverage: ## check code coverage quickly with the default Python
 
 .PHONY: docs
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
-	sphinx-apidoc --module-first --separate -o docs/api/ {{ cookiecutter.project_slug }}
+	sphinx-apidoc --separate --no-toc -o docs/api/ {{ cookiecutter.project_slug }}
 	$(MAKE) -C docs html
 
 .PHONY: view-docs
