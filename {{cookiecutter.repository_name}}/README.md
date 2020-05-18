@@ -6,10 +6,18 @@
 <!-- Uncomment these lines after releasing the package to PyPI for version and downloads badges -->
 <!--[![PyPI Shield](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg)](https://pypi.python.org/pypi/{{ cookiecutter.package_name }})-->
 <!--[![Downloads](https://pepy.tech/badge/{{ cookiecutter.package_name }})](https://pepy.tech/project/{{ cookiecutter.package_name }})-->
+ci_provider
+{%- if cookiecutter.ci_provider == 'Travis CI' %}
 [![Travis CI Shield](https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}.svg?branch=master)](https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
-{%- if cookiecutter.use_codecov == 'y' %}
+{%- endif %}
+{%- if cookiecutter.ci_provider == 'Github Actions' %}
+[![Github Actions Shield](https://img.shields.io/github/workflow/status/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/Run%20Tests)](https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/actions)
+{%- endif %}
+{%- if cookiecutter.use_codecov_with_ci == 'y' %}
 [![Coverage Status](https://codecov.io/gh/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/branch/master/graph/badge.svg)](https://codecov.io/gh/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
 {%- endif %}
+
+
 
 # {{ cookiecutter.project_name }}
 

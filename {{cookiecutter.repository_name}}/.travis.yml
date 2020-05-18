@@ -16,7 +16,7 @@ matrix:
       sudo: required
 
 # Command to install dependencies
-{%- if cookiecutter.use_codecov == 'y' %}
+{%- if cookiecutter.use_codecov_with_ci == 'y' %}
 install: pip install -U tox-travis codecov
 
 after_success: codecov
@@ -27,10 +27,10 @@ install: pip install -U tox-travis
 # Command to run tests
 script: tox
 
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' or cookiecutter.use_ghpages_deployment_with_travis == 'y' -%}
+{% if cookiecutter.use_pypi_with_ci == 'y' or cookiecutter.use_ghpages_with_ci == 'y' -%}
 deploy:
 {%- endif %}
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' %}
+{% if cookiecutter.use_pypi_with_ci == 'y' %}
   # Automatically deploy releases to PyPI for each tagged commit
   # Assuming you have installed the travis-ci CLI tool, after you
   # create the Github repo and add it to Travis, run the
@@ -47,7 +47,7 @@ deploy:
       repo: {{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}
       python: 3.6
 {%- endif %}
-{% if cookiecutter.use_ghpages_deployment_with_travis == 'y' %}
+{% if cookiecutter.use_ghpages_with_ci == 'y' %}
   # Automatically build and deploy documentation to GitHub Pages after every
   # commit
   # Follow the instructions at https://docs.travis-ci.com/user/deployment/pages/

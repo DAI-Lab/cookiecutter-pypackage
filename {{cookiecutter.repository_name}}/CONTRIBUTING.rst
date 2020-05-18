@@ -123,7 +123,7 @@ Before you submit a pull request, check that it meets these guidelines:
 4. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the documentation in an appropriate place.
-5. The pull request should work for all the supported Python versions. Check the `Travis Build
+5. The pull request should work for all the supported Python versions. Check the `Build
    Status page`_ and make sure that all the checks pass.
 
 Unit Testing Guidelines
@@ -233,5 +233,9 @@ or in command line::
 
 
 .. _GitHub issues page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/issues
-.. _Travis Build Status page: https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/pull_requests
+{%- if cookiecutter.ci_provider == 'Github Actions' %}
+.. _Build Status page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/actions
+{%- else %}
+.. _Build Status page: https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/pull_requests
+{%- endif %}
 .. _Google docstrings style: https://google.github.io/styleguide/pyguide.html?showone=Comments#Comments

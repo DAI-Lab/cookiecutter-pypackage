@@ -43,7 +43,7 @@ Options
 
 The following package configuration options set up different features for your project.
 
-use_pypi_deployment_with_travis
+use_pypi_with_ci
     Whether to use PyPI deployment with Travis.
 
 command_line_interface

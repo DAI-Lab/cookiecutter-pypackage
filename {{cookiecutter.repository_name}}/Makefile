@@ -52,7 +52,7 @@ install-develop: clean-build clean-pyc ## install the package in editable mode a
 
 .PHONY: test-all
 test-all: ## run tests on every Python version with tox
-	tox -r
+	tox -r -p auto
 
 .PHONY: fix-lint
 fix-lint: ## fix lint issues using autoflake, autopep8, and isort
