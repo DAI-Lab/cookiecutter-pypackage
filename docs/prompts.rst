@@ -44,7 +44,7 @@ Options
 The following package configuration options set up different features for your project.
 
 use_pypi_with_ci
-    Whether to use PyPI deployment with Travis.
+    Whether to automatically deploy to PyPI on git tags
 
 command_line_interface
     Whether to create a console script using Click. Console script entry point will match the project_slug. Options: ['Click', "No command-line interface"]

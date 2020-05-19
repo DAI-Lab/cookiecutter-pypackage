@@ -235,7 +235,8 @@ or in command line::
 .. _GitHub issues page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/issues
 {%- if cookiecutter.ci_provider == 'Github Actions' %}
 .. _Build Status page: https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/actions
-{%- else %}
+{%- endif %}
+{%- if cookiecutter.ci_provider == 'Travis CI' %}
 .. _Build Status page: https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/pull_requests
 {%- endif %}
 .. _Google docstrings style: https://google.github.io/styleguide/pyguide.html?showone=Comments#Comments
