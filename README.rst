@@ -19,7 +19,7 @@ Features
 * Testing setup with ``unittest`` and ``pytest``
 * Github-Actions_: Ready for Github Actions Continuous Integration testing
 * Travis-CI_: Ready for Travis Continuous Integration testing
-* Tox_ testing: Setup to easily test for Python 2.7, 3.4, 3.5, 3.6
+* Tox_ testing: Setup to easily test for Python 2.7, 3.5, 3.6, 3.7, 3.8
 * Sphinx_ docs: Documentation ready for generation, automatic building and deploying to gh-pages (strongly recommended)
 * Bumpversion_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (strongly recommended)
@@ -199,8 +199,8 @@ things are files and folders and I'll give you a quick overview of what they
 are/do.
 
 * Tox_ (tox.ini): A system that can run all kinds of tests for you. For
-  instance, you can test your code on various versions (Python 2.7, 3.4, 3.5,
-  3.6) and test your code on linters as well.
+  instance, you can test your code on various versions (Python 2.7, 3.5,
+  3.6, 3.7, 3.8) and test your code on linters as well.
 
 * Travis-CI_ (travis.yml): A continuous integration system. That means every
   time you push a commit it will simulate downloading your project, installing

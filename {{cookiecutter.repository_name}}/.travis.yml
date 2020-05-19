@@ -2,9 +2,10 @@
 dist: trusty
 language: python
 python:
+  - 3.8
+  - 3.7
   - 3.6
   - 3.5
-  - 3.4
 {%- if cookiecutter.support_py2 == 'y' %}
   - 2.7
 {%- endif %}
@@ -45,7 +46,7 @@ deploy:
     on:
       tags: true
       repo: {{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}
-      python: 3.6
+      python: 3.7
 {%- endif %}
 {% if cookiecutter.use_ghpages_with_ci == 'y' %}
   # Automatically build and deploy documentation to GitHub Pages after every
@@ -61,5 +62,5 @@ deploy:
     target-branch: gh-pages
     on:
       branch: master
-      python: 3.6
+      python: 3.7
 {%- endif %}

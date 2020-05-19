@@ -77,10 +77,10 @@ setup(
         'Programming Language :: Python :: 2.7',
 {%- endif %}
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
     description='{{ cookiecutter.project_short_description.replace("\'", "\\\'") }}',
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
@@ -108,7 +108,7 @@ setup(
 {%- if cookiecutter.support_py2 == 'y' %}
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
 {%- else %}
-    python_requires='>=3.4',
+    python_requires='>=3.5',
 {%- endif %}
     setup_requires=setup_requires,
     test_suite='tests',
