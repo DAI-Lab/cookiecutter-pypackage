@@ -18,9 +18,12 @@ def main():
         cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
         remove_file(cli_file)
 
+    if '{{ cookiecutter.use_pypi_with_ci }}' != 'y':
+        remove_file('.github/workflows/deploy.yml')
+
     if '{{ cookiecutter.ci_provider }}' != 'Travis CI':
         remove_file('.travis.yml')
-    elif '{{ cookiecutter.ci_provider }}' != 'Github Actions':
+    if '{{ cookiecutter.ci_provider }}' != 'Github Actions':
         remove_file('.github/workflows/docs.yml')
         remove_file('.github/workflows/tests.yml')
 

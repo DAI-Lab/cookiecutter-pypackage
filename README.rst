@@ -73,7 +73,7 @@ Then:
 6. Automatically deploy to PyPI on new tags.
 
    * Register_ your project with PyPI, or use the DAI Lab account (`dai_lab_mit`, ask someone for the info)
-   * Use Travis to encrypt your PyPI password in Travis config and activate automated deployment on PyPI when you push a new tag to master branch - see the ``.travis.yml`` file of your project for details. Alternatively, if using Github Actions, you can generate an API token on PyPI and add it to your Github Secrets with the name ``pypi_password`` - see the ``.github/workflows/tests.yml`` file of your project for details.
+   * Use Travis to encrypt your PyPI password in Travis config and activate automated deployment on PyPI when you push a new tag to master branch - see the ``.travis.yml`` file of your project for details. Alternatively, if using Github Actions, you can generate an API token on PyPI and add it to your Github Secrets with the name ``pypi_password`` - see the ``.github/workflows/deploy.yml`` file of your project for details.
    * Test the release process
 
        * Ensure you can create the dist using ``make dist``
