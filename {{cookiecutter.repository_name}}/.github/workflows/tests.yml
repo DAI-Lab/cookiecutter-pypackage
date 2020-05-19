@@ -27,6 +27,7 @@ jobs:
       run: tox
 
 {%- if cookiecutter.use_codecov_with_ci == 'y' %}
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
@@ -34,6 +35,7 @@ jobs:
 {%- endif %}
 
 {%- if cookiecutter.use_pypi_with_ci == 'y' %}
+
   # Automatically deploy releases to PyPI for each tagged commit. This
   # uses the API Token feature (https://pypi.org/help/#apitoken). After
   # obtaining an API token from PyPI, add it to your github secrets with

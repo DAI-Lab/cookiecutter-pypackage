@@ -36,7 +36,7 @@ TODO: Provide a short overview of the project here.
 
 ## Requirements
 
-**{{ cookiecutter.project_name }}** has been developed and tested on [Python {%- if cookiecutter.support_py2 == 'y' %}2.7, {%- endif %}3.4, 3.5, 3.6 and 3.7](https://www.python.org/downloads/)
+**{{ cookiecutter.project_name }}** has been developed and tested on [Python {% if cookiecutter.support_py2 == 'y' %}2.7, {% endif %}3.4, 3.5, 3.6 and 3.7](https://www.python.org/downloads/)
 
 Also, although it is not strictly required, the usage of a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 is highly recommended in order to avoid interfering with other software installed in the system
