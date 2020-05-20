@@ -6,10 +6,17 @@
 <!-- Uncomment these lines after releasing the package to PyPI for version and downloads badges -->
 <!--[![PyPI Shield](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg)](https://pypi.python.org/pypi/{{ cookiecutter.package_name }})-->
 <!--[![Downloads](https://pepy.tech/badge/{{ cookiecutter.package_name }})](https://pepy.tech/project/{{ cookiecutter.package_name }})-->
+{%- if cookiecutter.ci_provider == 'Travis CI' %}
 [![Travis CI Shield](https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}.svg?branch=master)](https://travis-ci.org/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
-{%- if cookiecutter.use_codecov == 'y' %}
+{%- endif %}
+{%- if cookiecutter.ci_provider == 'Github Actions' %}
+[![Github Actions Shield](https://img.shields.io/github/workflow/status/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/Run%20Tests)](https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/actions)
+{%- endif %}
+{%- if cookiecutter.use_codecov_with_ci == 'y' %}
 [![Coverage Status](https://codecov.io/gh/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }}/branch/master/graph/badge.svg)](https://codecov.io/gh/{{ cookiecutter.github_owner }}/{{ cookiecutter.repository_name }})
 {%- endif %}
+
+
 
 # {{ cookiecutter.project_name }}
 
@@ -29,7 +36,7 @@ TODO: Provide a short overview of the project here.
 
 ## Requirements
 
-**{{ cookiecutter.project_name }}** has been developed and tested on [Python {%- if cookiecutter.support_py2 == 'y' %}2.7, {%- endif %}3.4, 3.5, 3.6 and 3.7](https://www.python.org/downloads/)
+**{{ cookiecutter.project_name }}** has been developed and tested on [Python {% if cookiecutter.support_py2 == 'y' %}2.7, {% endif %}3.5, 3.6, 3.7 and 3.8](https://www.python.org/downloads/)
 
 Also, although it is not strictly required, the usage of a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 is highly recommended in order to avoid interfering with other software installed in the system

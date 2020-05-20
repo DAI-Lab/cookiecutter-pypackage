@@ -17,8 +17,9 @@ Features
 --------
 
 * Testing setup with ``unittest`` and ``pytest``
+* Github-Actions_: Ready for Github Actions Continuous Integration testing
 * Travis-CI_: Ready for Travis Continuous Integration testing
-* Tox_ testing: Setup to easily test for Python 2.7, 3.4, 3.5, 3.6
+* Tox_ testing: Setup to easily test for Python 2.7, 3.5, 3.6, 3.7, 3.8
 * Sphinx_ docs: Documentation ready for generation, automatic building and deploying to gh-pages (strongly recommended)
 * Bumpversion_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (strongly recommended)
@@ -56,23 +57,23 @@ Then:
    * Install tox (``pip install tox``)
    * Run tox (``tox``)
 
-4. Configure Travis to run tests and build documentation
+4. Configure Travis to run tests and build documentation. If you're using Github Actions, you can skip this step.
 
 
    * Create the repo on GitHub if it is not already there
    * Add the repo to your Travis-CI_ account (https://travis-ci.org/ORG_NAME/PROJECT_NAME)
    * Push a commit and monitor the build
 
-5. Configure Travis to automatically deploy documentation to GitHub pages
+5. Configure Travis to automatically deploy documentation to GitHub pages. If you're using Github Actions, you can skip this step.
 
    * Configure a GitHub deployment token and add it to Travis. See the ``.travis.yml`` file of your project for details.
    * Push a commit and watch your documentation being built.
    * View the documentation at https://hdi-project.github.io/PROJECT_NAME
 
-6. Configure Travis to automatically deploy to PyPI on new tags
+6. Automatically deploy to PyPI on new tags.
 
    * Register_ your project with PyPI, or use the DAI Lab account (`dai_lab_mit`, ask someone for the info)
-   * Use Travis to encrypt your PyPI password in Travis config and activate automated deployment on PyPI when you push a new tag to master branch. See the ``.travis.yml`` file of your project for details.
+   * Use Travis to encrypt your PyPI password in Travis config and activate automated deployment on PyPI when you push a new tag to master branch - see the ``.travis.yml`` file of your project for details. Alternatively, if using Github Actions, you can generate an API token on PyPI and add it to your Github Secrets with the name ``pypi_password`` - see the ``.github/workflows/deploy.yml`` file of your project for details.
    * Test the release process
 
        * Ensure you can create the dist using ``make dist``
@@ -82,7 +83,7 @@ Then:
 
    * Tag a new release using ``bumpversion`` (TODO)
    * Push the latest *commit* to master and ensure that tests pass (``git push origin master``)
-   * Push the latest *tag* to master and watch as Travis will automatically deploy your release to PyPI (``git push --tags origin master``)
+   * Push the latest *tag* to master and watch as Travis / Github Actions will automatically deploy your release to PyPI (``git push --tags origin master``)
 
 7. Start developing!
 
@@ -198,8 +199,8 @@ things are files and folders and I'll give you a quick overview of what they
 are/do.
 
 * Tox_ (tox.ini): A system that can run all kinds of tests for you. For
-  instance, you can test your code on various versions (Python 2.7, 3.4, 3.5,
-  3.6) and test your code on linters as well.
+  instance, you can test your code on various versions (Python 2.7, 3.5,
+  3.6, 3.7, 3.8) and test your code on linters as well.
 
 * Travis-CI_ (travis.yml): A continuous integration system. That means every
   time you push a commit it will simulate downloading your project, installing
@@ -254,6 +255,7 @@ are/do.
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
 .. _Cookiecutter: https://github.com/DAI-Lab/cookiecutter
 .. _Travis-CI: http://travis-ci.org/
+.. _Github-Actions: https://github.com/features/actions
 .. _Tox: http://testrun.org/tox/
 .. _Sphinx: http://sphinx-doc.org/
 .. _Bumpversion: https://github.com/peritus/bumpversion
