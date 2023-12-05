@@ -2,7 +2,7 @@
   "full_name": "Your Name",
   "email": "email@mit.edu",
   "github_username": "username",
-  "github_owner": ["DAI-Lab", "HDI-Project", "D3-AI", "data-dev", "sdv-dev", "{{ cookiecutter.github_username }}"],
+  "github_owner": ["DAI-Lab", "HDI-Project", "D3-AI", "data-dev", "sdv-dev", "sintel-dev", "{{ cookiecutter.github_username }}"],
   "project_name": "Python Boilerplate",
   "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
   "project_slug": "{{ cookiecutter.package_name.replace('-', '_') }}",
