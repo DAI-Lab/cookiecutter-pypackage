@@ -36,13 +36,13 @@ TODO: Provide a short overview of the project here.
 
 ## Requirements
 
-**{{ cookiecutter.project_name }}** has been developed and tested on [Python {% if cookiecutter.support_py2 == 'y' %}2.7, {% endif %}3.5, 3.6, 3.7 and 3.8](https://www.python.org/downloads/)
+**{{ cookiecutter.project_name }}** has been developed and tested on [Python {% if cookiecutter.support_py2 == 'y' %}2.7, {% endif %}3.8, 3.9, 3.10 and 3.11](https://www.python.org/downloads/)
 
 Also, although it is not strictly required, the usage of a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 is highly recommended in order to avoid interfering with other software installed in the system
 in which **{{ cookiecutter.project_name }}** is run.
 
-These are the minimum commands needed to create a virtualenv using python3.6 for **{{ cookiecutter.project_name }}**:
+These are the minimum commands needed to create a virtualenv using python3.8 for **{{ cookiecutter.project_name }}**:
 
 ```bash
 pip install virtualenv
