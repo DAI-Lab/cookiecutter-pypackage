@@ -29,6 +29,9 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
+
+# INSTALL TARGETS
+
 .PHONY: install
 install: clean-build clean-pyc ## install the package to the active Python's site-packages
 	pip install .
@@ -37,28 +40,73 @@ install: clean-build clean-pyc ## install the package to the active Python's sit
 install-test: clean-build clean-pyc ## install the package and test dependencies
 	pip install .[test]
 
-.PHONY: test
-test: ## run tests quickly with the default Python
-	python -m pytest --basetemp=${ENVTMPDIR} --cov={{ cookiecutter.project_slug }} --cov-report xml
-
-.PHONY: lint
-lint: ## check style with flake8 and isort
-	flake8 {{ cookiecutter.project_slug }} tests
-	isort -c --recursive {{ cookiecutter.project_slug }} tests
-
 .PHONY: install-develop
 install-develop: clean-build clean-pyc ## install the package in editable mode and dependencies for development
 	pip install -e .[dev]
 
+MINIMUM := $(shell sed -n '/dependencies = \[/,/]/p' pyproject.toml | grep -v -e '[][]' | sed 's/ *\(.*\),$?$$/\1/g' | tr '>' '=')
+
+.PHONY: install-minimum
+install-minimum: ## install the minimum supported versions of the package dependencies
+	pip install $(MINIMUM)
+
+.PHONY: check-dependencies
+check-dependencies: ## test if there are any broken dependencies
+	pip check
+
+
+# LINT TARGETS
+
+.PHONY: lint
+lint: ## check style with flake8 and isort
+	invoke lint
+
+.PHONY: lint-{{ cookiecutter.project_slug }}
+lint-{{ cookiecutter.project_slug }}: ## check style with ruff
+	ruff check {{ cookiecutter.project_slug }}/
+	ruff format --check --diff {{ cookiecutter.project_slug }}/
+
+.PHONY: lint-tests
+lint-tests: ## check style with ruff
+	ruff check tests/
+	ruff format --check --diff tests/
+
+.PHONY: fix-lint
+fix-lint: ## fix lint issues using ruff
+	invoke fix-lint
+
+
+# TEST TARGETS
+
+.PHONY: test-unit
+test-unit: ## run tests quickly with the default Python
+	pytest
+
+.PHONY: test-readme
+test-readme: ## run the readme snippets
+	@if command -v rundoc >/dev/null 2>&1; then \
+		rundoc run --single-session python3 -t python3 README.md; \
+	else \
+		echo "Skipping test-readme because rundoc is not installed"; \
+	fi
+
+.PHONY: test-tutorials
+test-tutorials: ## run the tutorial notebooks
+	@if [ -d tutorials ] && ls tutorials/*.ipynb >/dev/null 2>&1; then \
+		jupyter nbconvert --execute --ExecutePreprocessor.timeout=3600 --to=html --stdout tutorials/*.ipynb >/dev/null; \
+	else \
+		echo "Skipping test-tutorials because no tutorials were found"; \
+	fi
+
+.PHONY: test
+test: test-unit test-readme test-tutorials ## test everything that needs test dependencies
+
+.PHONY: test-minimum
+test-minimum: install-minimum check-dependencies test ## run tests using the minimum supported dependencies
+
 .PHONY: test-all
 test-all: ## run tests on every Python version with tox
 	tox -r -p auto
-
-.PHONY: fix-lint
-fix-lint: ## fix lint issues using autoflake, autopep8, and isort
-	find {{ cookiecutter.project_slug }} tests -name '*.py' | xargs autoflake --in-place --remove-all-unused-imports --remove-unused-variables
-	autopep8 --in-place --recursive --aggressive {{ cookiecutter.project_slug }} tests
-	isort --apply --atomic --recursive {{ cookiecutter.project_slug }} tests
 
 .PHONY: coverage
 coverage: ## check code coverage quickly with the default Python
@@ -66,6 +114,9 @@ coverage: ## check code coverage quickly with the default Python
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
+
+
+# DOCS TARGETS
 
 .PHONY: docs
 docs: clean-docs ## generate Sphinx HTML documentation, including API docs
@@ -80,48 +131,76 @@ view-docs: docs ## view docs in browser
 serve-docs: view-docs ## compile the docs watching for changes
 	watchmedo shell-command -W -R -D -p '*.rst;*.md' -c '$(MAKE) -C docs html' .
 
+
+# RELEASE TARGETS
+
 .PHONY: dist
 dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python -m build --wheel --sdist
 	ls -l dist
+
+.PHONY: publish-confirm
+publish-confirm:
+	@echo "WARNING: This will irreversibly upload a new version to PyPI!"
+	@echo -n "Please type 'confirm' to proceed: " \
+		&& read answer \
+		&& [ "$${answer}" = "confirm" ]
 
 .PHONY: test-publish
 test-publish: dist ## package and upload a release on TestPyPI
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 .PHONY: publish
-publish: dist ## package and upload a release
+publish: dist publish-confirm ## package and upload a release
 	twine upload dist/*
 
 .PHONY: bumpversion-release
 bumpversion-release: ## Merge master to stable and bumpversion release
-	git checkout stable
+	git checkout stable || git checkout -b stable
 	git merge --no-ff master -m"make release-tag: Merge branch 'master' into stable"
-	bumpversion release
+	bump-my-version bump release
 	git push --tags origin stable
+
+.PHONY: bumpversion-release-test
+bumpversion-release-test: ## Merge master to stable and bumpversion release
+	git checkout stable || git checkout -b stable
+	git merge --no-ff master -m"make release-tag: Merge branch 'master' into stable"
+	bump-my-version bump release --no-tag
+	@echo git push --tags origin stable
 
 .PHONY: bumpversion-patch
 bumpversion-patch: ## Merge stable to master and bumpversion patch
 	git checkout master
 	git merge stable
-	bumpversion --no-tag patch
+	bump-my-version bump --no-tag patch
 	git push
 
 .PHONY: bumpversion-minor
 bumpversion-minor: ## Bump the version the next minor skipping the release
-	bumpversion --no-tag minor
+	bump-my-version bump --no-tag minor
 
 .PHONY: bumpversion-major
 bumpversion-major: ## Bump the version the next major skipping the release
-	bumpversion --no-tag major
+	bump-my-version bump --no-tag major
 
 .PHONY: bumpversion-candidate
 bumpversion-candidate: ## Bump the version to the next candidate
-	bumpversion candidate --no-tag
+	bump-my-version bump candidate --no-tag
 
+.PHONY: bumpversion-revert
+bumpversion-revert: ## Undo a previous bumpversion-release
+	git checkout master
+	git branch -D stable
+
+CLEAN_DIR := $(shell git status --short | grep -v ??)
 CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null)
 CHANGELOG_LINES := $(shell git diff HEAD..origin/stable HISTORY.md 2>&1 | wc -l)
+
+.PHONY: check-clean
+check-clean: ## Check if the directory has uncommitted changes
+ifneq ($(CLEAN_DIR),)
+	$(error There are uncommitted changes)
+endif
 
 .PHONY: check-master
 check-master: ## Check if we are in master branch
@@ -137,18 +216,28 @@ endif
 
 .PHONY: check-release
 check-release: check-master check-history ## Check if the release can be made
+	@echo "A new release can be made"
 
 .PHONY: release
 release: check-release bumpversion-release publish bumpversion-patch
 
+.PHONY: release-test
+release-test: check-release bumpversion-release-test publish-test bumpversion-revert
+
 .PHONY: release-candidate
 release-candidate: check-master publish bumpversion-candidate
+
+.PHONY: release-candidate-test
+release-candidate-test: check-clean check-master publish-test
 
 .PHONY: release-minor
 release-minor: check-release bumpversion-minor release
 
 .PHONY: release-major
 release-major: check-release bumpversion-major release
+
+
+# CLEAN TARGETS
 
 .PHONY: clean
 clean: clean-build clean-pyc clean-test clean-coverage clean-docs ## remove all build, test, coverage, docs and Python artifacts
@@ -158,8 +247,8 @@ clean-build: ## remove build artifacts
 	rm -fr build/
 	rm -fr dist/
 	rm -fr .eggs/
-	find . -name '*.egg-info' -exec rm -fr {} +
-	find . -name '*.egg' -exec rm -f {} +
+	find . -path './.tox' -prune -o -name '*.egg-info' -exec rm -fr {} +
+	find . -path './.tox' -prune -o -name '*.egg' -exec rm -fr {} +
 
 .PHONY: clean-pyc
 clean-pyc: ## remove Python file artifacts

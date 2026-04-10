@@ -10,4 +10,6 @@ Development Lead
 Contributors
 ------------
 
+{% if cookiecutter.create_author_file == 'y' %}
 None yet. Why not be the first?
+{% endif %}

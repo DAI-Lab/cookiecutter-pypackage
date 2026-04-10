@@ -4,6 +4,7 @@ help:
 	@echo "bake 	generate project using defaults"
 	@echo "watch 	generate project using defaults and watch for changes"
 	@echo "replay 	replay last cookiecutter run and watch for changes"
+	@echo "install-dev 	install development dependencies"
 
 bake:
 	cookiecutter $(BAKE_OPTIONS) . --overwrite-if-exists
@@ -14,3 +15,6 @@ watch: bake
 replay: BAKE_OPTIONS=--replay
 replay: watch
 	;
+
+install-dev:
+	pip install -e .[dev]

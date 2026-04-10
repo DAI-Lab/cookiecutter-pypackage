@@ -18,8 +18,6 @@
 # relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
 
-import sphinx_rtd_theme # For read the docs theme
-
 import {{ cookiecutter.project_slug }}
 
 # -- General configuration ---------------------------------------------
@@ -31,7 +29,7 @@ import {{ cookiecutter.project_slug }}
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
-    'm2r',
+    'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx.ext.githubpages',
     'sphinx.ext.viewcode',
@@ -47,8 +45,10 @@ autodoc_default_options = {
 templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
-# You can specify multiple suffix as a list of string:
-source_suffix = ['.rst', '.md']
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # The master toctree document.
 master_doc = 'index'
@@ -76,7 +76,7 @@ release = {{ cookiecutter.project_slug }}.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -95,7 +95,6 @@ todo_include_todos = False
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Readthedocs additions
 html_context = {

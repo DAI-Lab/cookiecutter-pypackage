@@ -1,4 +1,5 @@
-.. include:: readme.rst
+{{ cookiecutter.project_name }}
+==============================
 
 .. toctree::
    :hidden:
